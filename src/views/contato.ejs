@@ -1,0 +1,57 @@
+<%- include('includes/head')%>
+  <%- include('includes/nav')%>
+
+    <div class="conteiner">
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8 my-3">
+          <h1 class="display-3 text-center">Agenda</h1>
+          <p class="text-center lead">Contatos:</p>
+          <div class="table responsive-table">
+            
+            <%- include('includes/messages') %>
+
+            <% if(contato._id) { %>
+              <form action="/contato/edit/<%= contato._id %>" method="post">
+            <% } else { %>
+              <form action="/contato/register" method="post">
+            <% } %>
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <div class="form-group">
+                <label>Nome</label>
+                <input type="text" class="form-control" value="<%= contato.nome %>" name="nome">
+              </div>
+  
+              <div class="form-group">
+                <label>Sobrenome</label>
+                <input type="text" class="form-control" value="<%= contato.sobrenome %>" name="sobrenome">
+              </div>
+  
+              <div class="form-group">
+                <label>E-mail</label>
+                <input type="email" class="form-control" value="<%= contato.email %>" name="email">
+              </div>
+  
+              <div class="form-group">
+                <label>Telefone</label>
+                <input type="tel" class="form-control" value="<%= contato.telefone %>" name="telefone">
+              </div>
+  
+              <% if(!contato._id) {%>
+                <button type="submit" class="btn btn-primary">Cadastrar contato</button>
+              <%} else {%>
+                <button type="submit" class="btn btn-primary">Atualizar contato</button>
+              <% } %> 
+            </form>
+
+          </div>
+
+          <% include('includes/messages')%>
+
+
+        </div>
+        <div class="col-lg-2"></div>
+      </div>
+    </div>
+
+    <%- include('includes/footer')%>
